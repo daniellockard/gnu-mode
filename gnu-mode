@@ -1,0 +1,20 @@
+#!/bin/bash
+
+command -v brew >/dev/null 2>&1 || { 
+echo >&2 "I require homebrew to be installed, but it's not. Visit https://brew.sh."
+exit 1
+}
+
+brew ls --version coreutils > /dev/null 2>&1 || {
+echo >&2 "I require coreutils to be installed from homebrew. run \`brew install coreutils\`"
+exit 1
+}
+
+brew ls --version gnu-sed > /dev/null 2>&1 || {
+echo >&2 "I require gnu-sed to be installed from homebrew. run \`brew install gnu-sed\`"
+exit 1
+}
+
+eval `/usr/libexec/path_helper -s`
+PATH=/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/coreutils/libexec/gnubin:$PATH
+zsh -d
